@@ -13,18 +13,34 @@
 </head>
 -->
 <body>
-    <br><br><br>
-    <center>
+<table border=1>
+    <thead>
+    <td>Contact</td>
+    <td>SSE</td>
+    <!--<td>city</td>-->
+    <!--<td>Pincode</td>-->
+    </thead>
+
+        <script>
+            var a=[]
+        </script>
+    {% for row in rows %}
+    <tr>
+        <script>
+            a.push('{{row}}')
+        </script>
+        <td>{{row}}</td>
+        <td>
         <div> 
-            <input id ="sseRoom" type="text" >
+            <input id ="{{row}}" type="text" >
             <button onclick="create()">create room </button> 
             <button onclick="join()">join room</button>
             
         </div>  
-        
-    </center>
-<br><br><br><br><br>
-
+        </td>
+    </tr>
+    {% endfor %}
+</table>
     <center>
 <table border=1>
     <thead>
@@ -57,19 +73,27 @@
         <script>
         function create() 
         {
-            var name = document.getElementById(sseRoom).value;
-
-            if (name != "")
+            for (var i=0 ; i < a.length ; i++)
             {
-                window.location="/wait/"+name;      
+                var name = document.getElementById(a[i]).value;
+
+                if (name != "")
+                {
+                    window.location="/wait/"+name;
+                
+                    //window.location="/wait/"+a[i]+"/"+name;
+                }
             }
         }
         function join() 
         {
-            var name = document.getElementById(sseRoom).value;
-            if (name != "")
+            for (var i=0 ; i < a.length ; i++)
             {
-                window.location="/join/"+name;
+                var name = document.getElementById(a[i]).value;
+                if (name != "")
+                {
+                    window.location="/join/"+name;
+                }
             }
         }
         function webSocketChat(clickedId) {
