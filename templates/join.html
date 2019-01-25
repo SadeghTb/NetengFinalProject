@@ -14,9 +14,16 @@
 
 <script>
     function send_message(massage, id, type) {
+        console.log(type)
+        console.log("OON")
+        console.log(id)
+        console.log("IN")
         var xhr = new XMLHttpRequest();
         var inp = "/channel/send/"+id+"/"+type;
         xhr.open('POST', inp, true);
+       // window.alert("MESSAGE SENT JOIN ")
+        //window.alert(inp)
+        //window.alert("END ")
         xhr.send(massage);
     }
 </script>
@@ -76,8 +83,13 @@
     function gotIceCandidate(event) {
        // window.alert("inwait join ice cond");
         if(event.candidate != null) {
-            // send_massage(JSON.stringify({'ice': event.candidate}) , "{{name}}", 'ice1');
-            peerConnection.addIceCandidate(new RTCIceCandidate(event.candidate));
+            // if(!peerConnection || !peerConnection.remoteDescription.type)
+            // {   
+                // window.alert("HERE")
+                // window.alert(JSON.stringify({'ice': event.candidate}))
+                send_message(JSON.stringify({'ice': event.candidate}) , "{{name}}", 'ice1');
+            //     peerConnection.addIceCandidate(new RTCIceCandidate(event.candidate));
+            // }
         }
     }
 
@@ -97,7 +109,7 @@
 
     source.addEventListener('ice2', gotIce);
     function gotIce(event) {
-       // window.alert("gotIce");
+       window.alert("gotIce");
         var data = JSON.parse(event.data);
         data =  JSON.parse(data.message);
         peerConnection.addIceCandidate(new RTCIceCandidate(data.ice)).catch(errorHandler);
@@ -116,9 +128,9 @@
         remoteVideo.src = window.URL.createObjectURL(event.stream);
     }
 
-    window.alert("A")
+    //window.alert("A")
     var mRecordRTC = new MRecordRTC();
-    window.alert("S")
+    //window.alert("S")
     mRecordRTC.mediaType = {
        video: true
     };

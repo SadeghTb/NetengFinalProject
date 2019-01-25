@@ -137,10 +137,6 @@ def list():
     for id in idlist:
         cur.execute("select username from users where id = ?", [id])
         namelist.append(cur.fetchall()[0][0])
-    #print(id)
-    #print(rows)
-    # return "hello"
-    # fetchet_rows = [row for row in rows if (row[0])]
     return render_template("list.html", rows=namelist , myname = session['username'])
 
 
@@ -164,12 +160,8 @@ def chat(chatroomname):
     the session."""
     print("Chat")
     name = session['username']
-    #session['chatroomname'] = chatroomname
     session['chatroomname'] = chatroomname 
     room = session['chatroomname']
-    #print(room)
-   # print("HERE")
-   # print(name)
     return render_template('websocket.html', name=name, room=room)
 
 @socketio.on('connect', namespace='/chat')

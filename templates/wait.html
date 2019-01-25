@@ -4,7 +4,7 @@
 </head>
 <body>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
-<video id="localVideo" autoplay muted style="width:40%;"></video>
+<video id="localVideo" autoplay muted style="width:20%;"></video>
 <video id="remoteVideo" autoplay style="width:40%;"></video>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/RecordRTC/5.5.3/RecordRTC.js"></script>
 <section class="experiment">
@@ -13,10 +13,11 @@
 </section>
 <script>
     function send_message(massage, id, type) {
-         
         var xhr = new XMLHttpRequest();
         var inp = "/channel/send/"+id+"/"+type;
         xhr.open('POST', inp, true);
+       // window.alert("MESSAGE SENT WAIT ")
+      //  window.alert(message)
         xhr.send(massage);
     }
 
@@ -73,9 +74,8 @@
 
     function gotIceCandidate(event) {
         if(event.candidate != null) {
-            window.alert("inwait got ice cond");
-            // send_massage(JSON.stringify({'ice': event.candidate}) , "{{name}}", 'ice2');
-            peerConnection.addIceCandidate(new RTCIceCandidate(event.candidate));
+            //window.alert("inwait got ice cond");
+            send_message(JSON.stringify({'ice': event.candidate}) , "{{name}}", 'ice2');
         }
     }
 
