@@ -76,7 +76,8 @@
     function gotIceCandidate(event) {
        // window.alert("inwait join ice cond");
         if(event.candidate != null) {
-            send_massage(JSON.stringify({'ice': event.candidate}) , "{{name}}", 'ice1');
+            // send_massage(JSON.stringify({'ice': event.candidate}) , "{{name}}", 'ice1');
+            peerConnection.addIceCandidate(new RTCIceCandidate(event.candidate));
         }
     }
 
