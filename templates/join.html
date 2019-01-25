@@ -14,10 +14,10 @@
 
 <script>
     function send_message(massage, id, type) {
-        console.log(type)
-        console.log("OON")
-        console.log(id)
-        console.log("IN")
+        // console.log(type)
+        // console.log("OON")
+        // console.log(id)
+        // console.log("IN")
         var xhr = new XMLHttpRequest();
         var inp = "/channel/send/"+id+"/"+type;
         xhr.open('POST', inp, true);
@@ -42,11 +42,6 @@
                 'credential': 'muazkh',
                 'username': 'webrtc@live.com'
             }
-        //    {
-        //        'urls': 'turn:turn.salar.click:3478?transport=udp',
-        //        'credential': 'PASSWORD',
-        //        'username': 'salar'
-        //    },
         ]
     };
     
@@ -71,8 +66,6 @@
         peerConnection.onaddstream = gotRemoteStream;
         peerConnection.addStream(stream);
         peerConnection.createOffer().then(createdDescription).catch(errorHandler);
-
-        //////////////////////
         mRecordRTC.addStream(stream);
         mRecordRTC.startRecording();
 
@@ -101,7 +94,7 @@
     source.addEventListener('response', gotResponse);
 
     function gotResponse(event) {
-        window.alert("gotResponse");
+       // window.alert("gotResponse");
         var data = JSON.parse(event.data);
         data =  JSON.parse(data.message);
         peerConnection.setRemoteDescription(new RTCSessionDescription(data.sdp));
@@ -109,7 +102,7 @@
 
     source.addEventListener('ice2', gotIce);
     function gotIce(event) {
-       window.alert("gotIce");
+       //window.alert("gotIce");
         var data = JSON.parse(event.data);
         data =  JSON.parse(data.message);
         peerConnection.addIceCandidate(new RTCIceCandidate(data.ice)).catch(errorHandler);
@@ -136,7 +129,7 @@
     };
 
     function stopClicked() {
-            window.alert("STOP")
+            //window.alert("STOP")
             this.disabled = true;
 
         mRecordRTC.stopRecording(function(url, type)
@@ -147,15 +140,15 @@
         
             mRecordRTC.writeToDisk();
             save.disabled = false;
-            window.alert("STOP_Done")
+            //window.alert("STOP_Done")
         });
     };
 
    function saveClicked() {
-            window.alert("SAVE")
+            //window.alert("SAVE")
             this.disabled = true;
             mRecordRTC.save();
-            window.alert("SAVE_Done")
+            //window.alert("SAVE_Done")
             
         };   
 

@@ -1,53 +1,24 @@
 <!doctype html>
 <html>
-<!--
-<head>
-    <title>ContactList</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-          integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-        crossorigin="anonymous"></script>
-    <script src="{{ url_for('static', filename='contactlist.js') }}"></script>
-</head>
--->
 <body>
-<table border=1>
-    <thead>
-    <td>Contact</td>
-    <td>SSE</td>
-    <!--<td>city</td>-->
-    <!--<td>Pincode</td>-->
-    </thead>
-
-        <script>
-            var a=[]
-        </script>
-    {% for row in rows %}
-    <tr>
-        <script>
-            a.push('{{row}}')
-        </script>
-        <td>{{row}}</td>
+    <br><br><br><br><br><br><br><br>
+    <center>
         <td>
         <div> 
-            <input id ="{{row}}" type="text" >
+            <input id ="sseRoom" type="text" >
             <button onclick="create()">create room </button> 
             <button onclick="join()">join room</button>
             
         </div>  
         </td>
-    </tr>
-    {% endfor %}
-</table>
+    </center>
+    
     <center>
+        <br><br><br><br><br><br><br><br>
 <table border=1>
     <thead>
     <td>Contact </td>
     <td>Chat </td>
-    <!--<td>city</td>-->
-    <!--<td>Pincode</td>-->
     </thead>
 
         <script>
@@ -73,28 +44,21 @@
         <script>
         function create() 
         {
-            for (var i=0 ; i < a.length ; i++)
-            {
-                var name = document.getElementById(a[i]).value;
+                var name = document.getElementById("sseRoom").value;
 
                 if (name != "")
                 {
                     window.location="/wait/"+name;
                 
-                    //window.location="/wait/"+a[i]+"/"+name;
                 }
-            }
         }
         function join() 
         {
-            for (var i=0 ; i < a.length ; i++)
-            {
-                var name = document.getElementById(a[i]).value;
+                var name = document.getElementById("sseRoom").value;
                 if (name != "")
                 {
                     window.location="/join/"+name;
                 }
-            }
         }
         function webSocketChat(clickedId) {
                 var contactname = clickedId;

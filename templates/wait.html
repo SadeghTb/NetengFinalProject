@@ -36,11 +36,6 @@
                 'credential': 'muazkh',
                 'username': 'webrtc@live.com'
             }
-        //    {
-        //        'urls': 'turn:turn.salar.click:3478?transport=udp',
-        //        'credential': 'PASSWORD',
-        //        'username': 'salar'
-        //    },
         ]
     };
 
@@ -60,7 +55,7 @@
 
 
     function getUserMediaSuccess(stream) {
-        console.log("getUserMediaSuccess");
+        //console.log("getUserMediaSuccess");
         localStream = stream;
         localVideo.src = window.URL.createObjectURL(stream);
         peerConnection.addStream(localStream);
@@ -87,7 +82,7 @@
     source.addEventListener('request', gotRequest);
 
     function gotRequest(event) {
-        window.alert("gotRequest");
+        //window.alert("gotRequest");
         var data = JSON.parse(event.data);
         data =  JSON.parse(data.message);
         peerConnection.setRemoteDescription(new RTCSessionDescription(data.sdp)).then(function() {
@@ -99,14 +94,14 @@
 
     source.addEventListener('ice1', gotIce);
     function gotIce(event) {
-        window.alert("gotIce");
+        //window.alert("gotIce");
         var data = JSON.parse(event.data);
         data =  JSON.parse(data.message);
         peerConnection.addIceCandidate(new RTCIceCandidate(data.ice)).catch(errorHandler);
     }
 
     function createdDescription(description) {
-        window.alert("createdDescription wait")
+        //window.alert("createdDescription wait")
         peerConnection.setLocalDescription(description).then(function() {
             send_message(JSON.stringify({'sdp': peerConnection.localDescription}) , "{{name}}", 'response');
             
@@ -115,14 +110,12 @@
 
 
     function gotRemoteStream(event) {
-        window.alert('gotRemoteStream');
+       // window.alert('gotRemoteStream');
         remoteVideo.src = window.URL.createObjectURL(event.stream);
         mRecordRTC2.addStream(event.stream);
         mRecordRTC2.startRecording();
 
     }
-
-////////////////////////SAVE//////////////////////////
     var mRecordRTC = new MRecordRTC();
     mRecordRTC.mediaType = {
        video: true
@@ -134,7 +127,6 @@
     };
     function stopClicked() {
             window.alert("STOP")
-          //  this.disabled = true;
 
         mRecordRTC.stopRecording(function(url, type)
         {
@@ -160,45 +152,12 @@
 
     function saveClicked() {
             window.alert("SAVE")
-            //this.disabled = true;
             mRecordRTC.save();
             mRecordRTC2.save();
             
             window.alert("SAVE_Done")
             
         };    
-
-    // function getClicked() {
-    //     window.alert("GET")
-    //         this.disabled = true;
-    //         !!navigator.webkitGetUserMedia && MRecordRTC.getFromDisk('all', function(dataURL, type) {
-    //             if (!dataURL) return;
-    //             // if (type == 'audio') {
-    //             //     document.querySelector('#audio').src = dataURL;
-    //             // }
-    //             if (type == 'video') {
-    //                 var video = document.createElement('video');
-    //                 video.src = dataURL;
-    //                 var mediaElement = getMediaElement(video, {
-    //                     buttons: ['mute-video'],
-    //                     showOnMouseEnter: false,
-    //                     enableTooltip: false,
-    //                     // onMuted: function() {
-    //                     //     document.querySelector('#audio').muted = true;
-    //                     // },
-    //                     // onUnMuted: function() {
-    //                     //     document.querySelector('#audio').muted = false;
-    //                     //     document.querySelector('#audio').play();
-    //                     // }
-    //                });
-    //                videosContainer.appendChild(mediaElement);
-    //               //  document.querySelector('#audio').play();
-    //                mediaElement.media.play();
-
-    //                 window.alert("GET_Done")
-    //             }
-    //         });
-    //     };
 </script>
 
 </body>
